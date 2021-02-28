@@ -48,8 +48,8 @@ def remove_pet_by_name(pet_shop, pet_name):
 def add_pet_to_stock(pet_shop, pet_name):
     pet_shop["pets"].append(pet_name)
 
-def get_customer_cash(pet_shop):
-    return pet_shop["cash"]
+def get_customer_cash(customer):
+    return customer["cash"]
 
 
 def remove_customer_cash(customer, cash):
@@ -70,3 +70,14 @@ def customer_can_afford_pet(customer, new_pet):
     else:
         return False
 
+def sell_pet_to_customer(pet_shop, pet, customer):
+    if find_pet_by_name(pet_shop, pet["name"]) != None:
+        if customer_can_afford_pet(customer, pet) == True:
+            customer["pets"].append(1)
+            pet_shop["admin"]["pets_sold"] = 1
+            customer["cash"] -= pet["price"]
+            pet_shop["admin"]["total_cash"] += pet["price"]
+        
+    # need to figure out how to work if the name isn't there
+    
+            
